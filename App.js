@@ -16,7 +16,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    setUserRequest();
+    dispatch(setUserRequest());
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
   }, []);

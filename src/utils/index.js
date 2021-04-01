@@ -1,5 +1,4 @@
 export * from "./firebasefunctions";
-export * from "./storeCache";
 
 export const generateTypes = (type) => {
   return {

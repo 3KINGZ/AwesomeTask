@@ -60,6 +60,10 @@ export const Login = ({ navigation }) => {
             <Input
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
+              // secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="password"
             />
             <View>
               <Text>or sign in with</Text>

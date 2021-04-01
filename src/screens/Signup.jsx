@@ -65,6 +65,10 @@ export const Signup = ({ navigation }) => {
             <Input
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
+              // secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="password"
             />
             <Input
               placeholder="Confirm Password"

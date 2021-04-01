@@ -29,7 +29,6 @@ export const Login = ({ navigation }) => {
     if (email && password) {
       dispatch(setUserRequest());
       const response = login(email, password);
-      console.log(response);
 
       response.then((resp) => {
         if (resp) {
@@ -97,12 +96,14 @@ export const Login = ({ navigation }) => {
           <Text style={styles.iconsContainerText}>or sign in with</Text>
           <View style={styles.iconsContainer}>
             <View
-              style={[styles.iconContainer, { backgroundColor: "#3b5998" }]}
+              style={[styles.iconContainer, { backgroundColor: colors.fbBlue }]}
             >
               <FAIcon name="facebook" color="white" size={24} />
             </View>
 
-            <View style={[styles.iconContainer, { backgroundColor: "red" }]}>
+            <View
+              style={[styles.iconContainer, { backgroundColor: colors.gRed }]}
+            >
               <AntIcon name="google" color="white" size={24} />
             </View>
           </View>

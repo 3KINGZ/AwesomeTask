@@ -31,7 +31,6 @@ export const Signup = ({ navigation }) => {
       const response = signup(email, password);
 
       response.then((resp) => {
-        console.log(resp);
         if (resp) {
           dispatch(setUserFailure("Email already in use"));
         }

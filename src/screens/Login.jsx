@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { Input, Button, ErrorText } from "../components";
 import { colors } from "../config/colors";
+import defaultStyles from "../config/styles";
 import { login } from "../utils";
 import { setUserFailure, setUserRequest } from "../actions";
 import { routes } from "../navigation/routes";
@@ -77,16 +78,9 @@ export const Login = ({ navigation }) => {
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(routes.SIGNUP)}
             >
-              <Text
-                style={{
-                  marginTop: 10,
-                  color: colors.whiteText,
-                  textAlign: "center",
-                  fontSize: 18,
-                }}
-              >
+              <Text style={defaultStyles.authLinkText}>
                 Don't have an account?{" "}
-                <Text style={{ fontWeight: "bold" }}>Signup</Text>
+                <Text style={defaultStyles.authLinkText2}>Signup</Text>
               </Text>
             </TouchableWithoutFeedback>
           </View>

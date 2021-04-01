@@ -14,7 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Input, Button, ErrorText } from "../components";
 import { colors } from "../config/colors";
 import { signup } from "../utils";
-import { setUserFailure } from "../actions";
+import { setUserFailure, setUserRequest } from "../actions";
 import { routes } from "../navigation/routes";
 
 export const Signup = ({ navigation }) => {
@@ -27,9 +27,11 @@ export const Signup = ({ navigation }) => {
 
   const createAccount = () => {
     if (email && password === confirmPassword) {
+      dispatch(setUserRequest());
       const response = signup(email, password);
 
       response.then((resp) => {
+        console.log(resp);
         if (resp) {
           dispatch(setUserFailure("Email already in use"));
         }
@@ -61,11 +63,15 @@ export const Signup = ({ navigation }) => {
             <Input
               placeholder="Email"
               onChangeText={(text) => setEmail(text)}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              autoCorrect={false}
+              textContentType="emailAddress"
             />
             <Input
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
-              // secureTextEntry
+              secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
               textContentType="password"
@@ -73,9 +79,17 @@ export const Signup = ({ navigation }) => {
             <Input
               placeholder="Confirm Password"
               onChangeText={(text) => setConfirmPassword(text)}
+              secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType="password"
             />
 
-            <Button title="Continue" onPress={createAccount} />
+            <Button
+              title="Continue"
+              onPress={createAccount}
+              loading={state.loading}
+            />
 
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(routes.LOGIN)}
@@ -87,7 +101,7 @@ export const Signup = ({ navigation }) => {
                   fontSize: 18,
                 }}
               >
-                Have an account already? Signup
+                Have an account already? Signin
               </Text>
             </TouchableWithoutFeedback>
           </View>
@@ -97,12 +111,14 @@ export const Signup = ({ navigation }) => {
           <Text style={styles.iconsContainerText}>or sign in with</Text>
           <View style={styles.iconsContainer}>
             <View
-              style={[styles.iconContainer, { backgroundColor: "#3b5998" }]}
+              style={[styles.iconContainer, { backgroundColor: colors.fbBlue }]}
             >
               <FAIcon name="facebook" color="white" size={24} />
             </View>
 
-            <View style={[styles.iconContainer, { backgroundColor: "red" }]}>
+            <View
+              style={[styles.iconContainer, { backgroundColor: colors.gRed }]}
+            >
               <AntIcon name="google" color="white" size={24} />
             </View>
           </View>

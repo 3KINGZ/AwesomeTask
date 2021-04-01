@@ -21,7 +21,13 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isLoggedIn: false, user: null, message: "" };
 
     case types.SET_USER.FAILURE:
-      return { ...state, isLoggedIn: false, user: null, message: payload };
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        message: payload,
+        loading: false,
+      };
 
     case types.LOGOUT_USER.FAILURE:
       return { ...state, isLoggedIn: false, message: payload };

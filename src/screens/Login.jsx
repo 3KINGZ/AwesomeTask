@@ -14,7 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Input, Button, ErrorText } from "../components";
 import { colors } from "../config/colors";
 import { login } from "../utils";
-import { setUserFailure } from "../actions";
+import { setUserFailure, setUserRequest } from "../actions";
 import { routes } from "../navigation/routes";
 
 export const Login = ({ navigation }) => {
@@ -27,7 +27,9 @@ export const Login = ({ navigation }) => {
 
   const Login = () => {
     if (email && password) {
+      dispatch(setUserRequest());
       const response = login(email, password);
+      console.log(response);
 
       response.then((resp) => {
         if (resp) {
@@ -47,39 +49,45 @@ export const Login = ({ navigation }) => {
       >
         <View>
           <Text style={styles.title}>Login</Text>
-          <Text style={styles.subtitle}>Fill the details & login</Text>
+          <Text style={styles.subtitle}>Fill the details & Login</Text>
         </View>
 
         <KeyboardAwareScrollView showsHorizontalScrollIndicator={false}>
           <View style={styles.inputContainer}>
             <ErrorText error={state.message} />
+
             <Input
               placeholder="Email"
               onChangeText={(text) => setEmail(text)}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              autoCorrect={false}
+              textContentType="emailAddress"
             />
             <Input
               placeholder="Password"
               onChangeText={(text) => setPassword(text)}
-              // secureTextEntry
+              secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
               textContentType="password"
             />
-            <View>
-              <Text>or sign in with</Text>
-            </View>
-            <Button title="Continue" onPress={Login} />
+
+            <Button title="Continue" onPress={Login} loading={state.loading} />
+
             <TouchableWithoutFeedback
               onPress={() => navigation.navigate(routes.SIGNUP)}
             >
               <Text
                 style={{
+                  marginTop: 10,
                   color: colors.whiteText,
                   textAlign: "center",
                   fontSize: 18,
                 }}
               >
-                Don't have an account? Signup
+                Don't have an account?{" "}
+                <Text style={{ fontWeight: "bold" }}>Signup</Text>
               </Text>
             </TouchableWithoutFeedback>
           </View>
